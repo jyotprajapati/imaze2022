@@ -19,27 +19,39 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Spacer(),
-          TextButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              child: Text("log out")),
-          SocialLoginButton(
-              // backgroundColor: Colors.amber,
-              height: 50,
-              text: 'SignIn',
-              borderRadius: 20,
-              fontSize: 25,
-              buttonType: SocialLoginButtonType.google,
-              imageWidth: 20,
-              onPressed: _onLoginPressed),
-          SizedBox(
-            height: 24,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+                "https://firebasestorage.googleapis.com/v0/b/imaze-6d6dc.appspot.com/o/Images%2FLogo%2FImaze_white%20text.png?alt=media&token=ad69e1e2-5735-4ad9-8471-3191c8a42aac"),
+            // TextButton(
+            //     onPressed: () {
+            //       FirebaseAuth.instance.signOut();
+            //     },
+            //     child: Text("log out")),
+            SizedBox(
+              height: 100,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SocialLoginButton(
+                  // backgroundColor: Colors.amber,
+                  height: 45,
+                  text: 'Sign in with Google',
+                  borderRadius: 20,
+                  fontSize: 20,
+                  textColor: Colors.grey,
+                  buttonType: SocialLoginButtonType.google,
+                  imageWidth: 20,
+                  onPressed: _onLoginPressed),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -55,11 +67,13 @@ class _LoginScreenState extends State<LoginScreen> {
       await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: Text('Muft ka nahi hai'),
-                content: Text('Paise dena padta hai pehla'),
+                //45064C
+                // backgroundColor: Color(0xFFF45064C),
+                title: Text('You have not registered yet'),
+                content: Text('Please register first'),
                 actions: [
                   FlatButton(
-                    child: Text('theek hai bhai'),
+                    child: Text('Ok'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

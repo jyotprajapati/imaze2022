@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:imaze2k22/features/auth/current_user.dart';
+import 'package:imaze2k22/features/events/registered_events/events_controller.dart';
 
 class AuthController {
   // if returns
@@ -38,17 +40,50 @@ class AuthController {
     return user;
   }
 
-  Future<void> saveUser(
-    String name,
-    String email,
-    String enrollmentNo,
-  ) async {
-    await FirebaseFirestore.instance.collection('users').doc(email).set(
+  Future<void> saveUser({
+    String? enrollment,
+    String? name,
+    String? email,
+    String? time,
+    String? College,
+    String? Department,
+    String? Year,
+    String? Phone,
+  }) async {
+    await FirebaseFirestore.instance.collection('users').doc(email).update(
       {
-        'name': name,
+        'Enrollment': enrollment,
+        'Name': name,
         'email': email,
-        'isRegistered': true,
+        'Time': time,
+        'College': College,
+        'Department': Department,
+        ' Year': Year,
+        'Phone': Phone,
       },
     );
+  }
+
+  getCurrentUserDetails() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final snapShot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.email!)
+        .get();
+    final data = snapShot.data();
+    if (data != null) {
+      CurrentUser().name = data['Name'] ?? "";
+      CurrentUser().email = data['email'] ?? "";
+      CurrentUser().college = data['College'] ?? "";
+      CurrentUser().dept = data['Department'] ?? "";
+      CurrentUser().technical = data['T'] ?? 0;
+      CurrentUser().nonTechnical = data['NT'] ?? 0;
+      CurrentUser().isIndividualRegistered =
+          data['isIndividualEvents'] ?? false;
+
+      CurrentUser().isCombo = data['isCombo'] ?? false;
+    }
+
+    return CurrentUser();
   }
 }

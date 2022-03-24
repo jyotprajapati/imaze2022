@@ -14,18 +14,26 @@ class SheetsInterceptor {
     print('sheets initialized got ${sheets!.spreadsheetId} ');
   }
 
-  Future addValue(
-    String enrollment,
-    String name,
-    String email,
-    String time,
-  ) async {
+  Future addValue({
+    String? enrollment,
+    String? name,
+    String? email,
+    String? time,
+    String? College,
+    String? Department,
+    String? Year,
+    String? Phone,
+  }) async {
     try {
       final row = {
         'Enrollment': enrollment,
         'Name': name,
         'email': email,
         'Time': time,
+        'College': College,
+        'Department': Department,
+        ' Year': Year,
+        'Phone': Phone,
       };
       await sheets!.values.appendRow(row.values.toList());
       print((await sheets!.values.map.allRows())!

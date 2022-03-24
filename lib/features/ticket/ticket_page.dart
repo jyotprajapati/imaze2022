@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:imaze2k22/core/Widgets/widget.dart';
 import 'package:imaze2k22/features/ticket/ticket_controller.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -30,6 +31,8 @@ class _TicketPageState extends State<TicketPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          ImazeLogo(),
+          Spacer(),
           Center(
             child: Text('Ticket Page'),
           ),
@@ -38,11 +41,16 @@ class _TicketPageState extends State<TicketPage> {
                   child: CircularProgressIndicator(),
                 )
               : QrImage(
+                  backgroundColor: Colors.white,
                   data: jsonEncode(data),
                   version: QrVersions.auto,
                   size: 200.0,
                 ),
-          Text(DateTime.now().toString()),
+          Text(
+            DateTime.now().toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          Spacer(),
         ],
       ),
     );

@@ -18,6 +18,7 @@ class _RegisteredEventsPageState extends State<RegisteredEventsPage> {
         await EventsController().getCurrentUserRegisteredEvents();
 
     events = await EventsController().getRegisteredEventsDetails(_userEvents);
+    print(events);
     setState(() {});
   }
 
@@ -29,21 +30,20 @@ class _RegisteredEventsPageState extends State<RegisteredEventsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: events.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: events.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(events[index].name ?? ""),
-                  subtitle: Text(events[index].desc ?? ""),
-                  onTap: () {},
-                );
-              },
-            ),
-    );
+    return events.isEmpty
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: events.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(events[index].name ?? ""),
+                subtitle: Text(events[index].desc ?? ""),
+                onTap: () {},
+              );
+            },
+          );
   }
 }
