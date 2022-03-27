@@ -14,71 +14,76 @@ class EventDetailScreen extends StatelessWidget {
             tag: "event_${event.name}",
             child: Image.network(event.imgUrl!),
           ),
-          DarkContatiner(
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${event.name}",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+          if (event.name != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${event.name}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
                 ),
               ),
+              EdgeInsets.all(9),
             ),
-            EdgeInsets.all(9),
-          ),
-          DarkContatiner(
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${event.desc}",
-                style: TextStyle(
-                  color: Colors.white,
-                  // fontSize: 20,
+          if (event.desc != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${event.desc}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    // fontSize: 20,
+                  ),
                 ),
               ),
+              EdgeInsets.all(9),
             ),
-            EdgeInsets.all(9),
-          ),
-          DarkContatiner(
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${event.date}",
-                style: TextStyle(
-                  color: Colors.white,
-                  // fontSize: 20,
+          if (event.date != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Date: ${event.date}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    // fontSize: 20,
+                  ),
                 ),
               ),
+              EdgeInsets.all(9),
             ),
-            EdgeInsets.all(9),
-          ),
-          DarkContatiner(
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${event.time}",
-                style: TextStyle(
-                  color: Colors.white,
-                  // fontSize: 20,
+          if (event.time != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Time: ${event.time}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    // fontSize: 20,
+                  ),
                 ),
               ),
+              EdgeInsets.all(9),
             ),
-            EdgeInsets.all(9),
-          ),
-          DarkContatiner(
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${event.venue}",
-                style: TextStyle(
-                  color: Colors.white,
-                  // fontSize: 20,
+          if (event.venue != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Venue: ${event.venue}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    // fontSize: 20,
+                  ),
                 ),
               ),
+              EdgeInsets.all(9),
             ),
-            EdgeInsets.all(9),
-          ),
         ],
       ),
     );
