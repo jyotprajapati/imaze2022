@@ -24,47 +24,99 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     await sheetsInterceptor.init();
-        //     if (sheetsInterceptor.sheets == null) {
-        //       print('sheets is null');
-        //       return;
-        //     }
-        //     await sheetsInterceptor.addValue(
-        //         enrollment: '12002080601050',
-        //         name: 'keval',
-        //         email: 'keval.prajapatimus@gmail.com',
-        //         time: DateTime.now().toIso8601String());
-        //     print('added');
-        //   },
-        //   child: Icon(Icons.add),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await sheetsInterceptor.initWorksheet("registration");
+            if (sheetsInterceptor.sheets == null) {
+              print('sheets is null');
+              return;
+            }
+            await sheetsInterceptor.addValue(
+                enrollment: 'rhr',
+                name: 'keval',
+                email: 'keval.prajapatimus@gmail.com',
+                time: DateTime.now().toIso8601String());
+            print('added');
+          },
+          child: Icon(Icons.add),
+        ),
         body: ListView(
-      children: [
-        ImazeLogo(),
-        for (int i = 0; i < 3; i++)
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EventPage(),
-                    ));
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Image.network(
-                  "https://www.marketing91.com/wp-content/uploads/2020/11/Non-technical-skills.jpg",
+          children: [
+            ImazeLogo(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventPage(type: "Technical"),
+                      ));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    "https://firebasestorage.googleapis.com/v0/b/imaze-6d6dc.appspot.com/o/Images%2FHome%20Screen%20Cards%2Ftech%20events1.jpg?alt=media&token=cf43dd88-3871-4a5b-bf71-ce2a14afac6d",
+                  ),
                 ),
               ),
             ),
-          )
-      ],
-    )
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventPage(type: "Technical"),
+                      ));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    "https://www.marketing91.com/wp-content/uploads/2020/11/Non-technical-skills.jpg",
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventPage(type: "Technical"),
+                      ));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    "https://www.marketing91.com/wp-content/uploads/2020/11/Non-technical-skills.jpg",
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventPage(type: "Technical"),
+                      ));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    "https://www.marketing91.com/wp-content/uploads/2020/11/Non-technical-skills.jpg",
+                  ),
+                ),
+              ),
+            )
+          ],
+        )
         // Column(
         //   mainAxisAlignment: MainAxisAlignment.center,
         //   children: [4

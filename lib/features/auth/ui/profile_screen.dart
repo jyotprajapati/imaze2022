@@ -5,6 +5,7 @@ import 'package:imaze2k22/features/auth/auth_controller.dart';
 import 'package:imaze2k22/features/auth/current_user.dart';
 import 'package:imaze2k22/features/auth/ui/login_screen.dart';
 import 'package:imaze2k22/features/events/registered_events/ui/registered_events_page.dart';
+import 'package:imaze2k22/features/homepage/ui/event_details_page.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -127,77 +128,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.03,
           ),
-          if (CurrentUser().isIndividualRegistered ?? false)
-            RegisteredEventsPage(),
-          if (CurrentUser().isCombo ?? false)
-            DarkContatiner(
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        "Combo Balance",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+          if (CurrentUser().registeredEvents != null &&
+              CurrentUser().registeredEvents!.isNotEmpty)
+            SizedBox(
+              height: 150,
+              child: ListView.builder(
+                controller: ScrollController(
+                  initialScrollOffset: 50,
+                ),
+                scrollDirection: Axis.horizontal,
+                itemCount: CurrentUser().registeredEvents!.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EventDetailScreen(
+                              event: CurrentUser().registeredEvents![index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag:
+                            "event_${CurrentUser().registeredEvents![index].name}",
+                        child: Image.network(
+                            CurrentUser().registeredEvents![index].imgUrl ??
+                                ""),
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.015,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Technical",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                ),
-                              ),
-                              Text(
-                                "${isLoading ? '...' : CurrentUser().technical}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Non-Technical",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                ),
-                              ),
-                              Text(
-                                " ${isLoading ? '...' : CurrentUser().nonTechnical}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
-              EdgeInsets.all(9),
             ),
           TextButton(
             onPressed: () {

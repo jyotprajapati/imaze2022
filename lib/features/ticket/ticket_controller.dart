@@ -12,18 +12,19 @@ class TicketController {
           .get();
       Map<String, dynamic> data = {};
       data = snapShot.data() ?? {} as Map<String, dynamic>;
-      if (data['isIndividualEvents'] == true) {
-        final snapShot = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.email)
-            .collection('events')
-            .get();
-        List<Map<String, dynamic>> events = [];
-        for (final doc in snapShot.docs) {
-          events.add((UserEvent.fromDocument(doc)).toMap());
-        }
-        data['events'] = events;
+
+      final eventSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.email)
+          .collection('events')
+          .get();
+      List<Map<String, dynamic>> events = [];
+      for (final doc in eventSnapshot.docs) {
+        events.add((UserEvent.fromDocument(doc)).toMap());
       }
+      // List<String> events = eventSnapshot.docs.map((doc) => doc.id).toList();
+      data['events'] = events;
+
       return data;
     } catch (e) {
       rethrow;

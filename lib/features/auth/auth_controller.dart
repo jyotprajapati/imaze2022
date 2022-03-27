@@ -58,8 +58,9 @@ class AuthController {
         'Time': time,
         'College': College,
         'Department': Department,
-        ' Year': Year,
+        'Year': Year,
         'Phone': Phone,
+        "isRegistered": true,
       },
     );
   }
@@ -76,13 +77,11 @@ class AuthController {
       CurrentUser().email = data['email'] ?? "";
       CurrentUser().college = data['College'] ?? "";
       CurrentUser().dept = data['Department'] ?? "";
-      CurrentUser().technical = data['T'] ?? 0;
-      CurrentUser().nonTechnical = data['NT'] ?? 0;
-      CurrentUser().isIndividualRegistered =
-          data['isIndividualEvents'] ?? false;
-
-      CurrentUser().isCombo = data['isCombo'] ?? false;
     }
+    List<UserEvent> _userEvents =
+        await EventsController().getCurrentUserRegisteredEvents();
+    CurrentUser().registeredEvents =
+        await EventsController().getRegisteredEventsDetails(_userEvents);
 
     return CurrentUser();
   }

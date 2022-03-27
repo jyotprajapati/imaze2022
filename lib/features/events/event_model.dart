@@ -8,12 +8,14 @@ class Event {
   String? time;
   String? venue;
   String? date;
+  String? imgUrl;
 
   Event(
       {this.department,
       this.desc,
       this.name,
       this.type,
+      this.imgUrl,
       this.time,
       this.venue,
       this.date});
@@ -26,6 +28,8 @@ class Event {
     time = json['time'];
     venue = json['venue'];
     date = json['date'];
+
+    imgUrl = json['Image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,11 +47,12 @@ class Event {
   Event.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
     department = data['department'];
-    desc = data['desc'];
-    name = data['name'];
+    desc = data['RoundDescription'];
+    name = data['Name'];
     type = data['type'];
     time = data['time'];
     venue = data['venue'];
     date = data['date'];
+    imgUrl = data['Image'];
   }
 }

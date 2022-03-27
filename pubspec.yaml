@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: 2.4.0
   qr_flutter: ^4.0.0
   gsheets: ^0.3.2
+  pretty_qr_code: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:

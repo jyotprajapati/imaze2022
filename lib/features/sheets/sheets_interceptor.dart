@@ -7,11 +7,25 @@ class SheetsInterceptor {
   final gsheets = GSheets(_credentials);
   Spreadsheet? ss;
   Worksheet? sheets;
+  // Future<void> init() async {
+  //   ss = await gsheets.spreadsheet(spreadSheetsId);
+  //   sheets = ss!.worksheetByTitle("registration");
+  //   sheets ??= await ss!.addWorksheet("registration");
+  //   print('sheets initialized got ${sheets!.spreadsheetId} ');
+  // }
   Future<void> init() async {
     ss = await gsheets.spreadsheet(spreadSheetsId);
-    sheets = ss!.worksheetByTitle("registration");
-    sheets ??= await ss!.addWorksheet("registration");
-    print('sheets initialized got ${sheets!.spreadsheetId} ');
+
+    // print('sheets initialized got ${sheets!.spreadsheetId} ');
+  }
+
+  Future<void> initWorksheet(String worksheet) async {
+    if (ss == null) {
+      await init();
+    }
+    sheets = ss!.worksheetByTitle(worksheet);
+    sheets ??= await ss!.addWorksheet(worksheet);
+    // print('sheets initialized got ${sheets!.spreadsheetId} ');
   }
 
   Future addValue({
@@ -23,6 +37,9 @@ class SheetsInterceptor {
     String? Department,
     String? Year,
     String? Phone,
+    String? events,
+    String? leaders,
+    String? leaderEmails,
   }) async {
     try {
       final row = {
@@ -32,21 +49,56 @@ class SheetsInterceptor {
         'Time': time,
         'College': College,
         'Department': Department,
-        ' Year': Year,
+        'Year': Year,
         'Phone': Phone,
+        'events': events,
+        'leaders': leaders,
+        'leaderEmails': leaderEmails,
       };
-      await sheets!.values.appendRow(row.values.toList());
-      print((await sheets!.values.map.allRows())!
-          .where((element) => element.containsValue(enrollment))
-          .toList());
-      if ((await sheets!.values.map.allRows())!
-          .where((element) => element.containsValue(enrollment))
-          .toList()
-          .isNotEmpty) {
-        return true;
-      } else {
-        return false;
+
+      final rowIndex = await sheets!.values.rowIndexOf(enrollment!);
+      if (!(rowIndex == -1)) {
+        print('already registered');
+        await sheets!.deleteRow(rowIndex);
       }
+      return await sheets!.values.appendRow(row.values.toList());
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  addIndividual({
+    String? enrollment,
+    String? name,
+    String? email,
+    String? time,
+    String? College,
+    String? Department,
+    String? Year,
+    String? Phone,
+    String? leaderName,
+    String? leaderEmail,
+  }) async {
+    try {
+      final row = {
+        'Enrollment': enrollment,
+        'Name': name,
+        'email': email,
+        'Time': time,
+        'College': College,
+        'Department': Department,
+        'Year': Year,
+        'Phone': Phone,
+        'leaderName': leaderName,
+        'leaderEmail': leaderEmail,
+      };
+      final rowIndex = await sheets!.values.rowIndexOf(enrollment!);
+      if (!(rowIndex == -1)) {
+        print('already registered');
+        await sheets!.deleteRow(rowIndex);
+      }
+      return await sheets!.values.appendRow(row.values.toList());
     } catch (e) {
       print(e);
       rethrow;

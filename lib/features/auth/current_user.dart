@@ -5,15 +5,11 @@ import 'package:imaze2k22/features/events/registered_events/events_controller.da
 
 class CurrentUser {
   static final CurrentUser _currentUser = CurrentUser._internal();
-  late String name;
-  late String email;
-  late String college;
-  late String dept;
-  late List<Event> registeredEvents;
-  late int technical;
-  late int nonTechnical;
-  bool? isIndividualRegistered;
-  bool? isCombo;
+  String? name;
+  String? email;
+  String? college;
+  String? dept;
+  List<Event>? registeredEvents;
 
   factory CurrentUser() {
     return _currentUser;
