@@ -156,8 +156,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         tag:
                             "event_${CurrentUser().registeredEvents![index].name}",
                         child: Image.network(
-                            CurrentUser().registeredEvents![index].imgUrl ??
-                                ""),
+                          CurrentUser().registeredEvents![index].imgUrl ?? "",
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.white,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '${CurrentUser().registeredEvents![index].name}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   );

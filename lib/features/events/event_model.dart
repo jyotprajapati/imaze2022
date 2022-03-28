@@ -22,12 +22,12 @@ class Event {
 
   Event.fromJson(Map<String, dynamic> json) {
     department = json['Department'];
-    desc = json['desc'];
-    name = json['name'];
-    type = json['type'];
-    time = json['time'];
-    venue = json['venue'];
-    date = json['date'];
+    desc = json['RoundDescription'];
+    name = json['Name'];
+    type = json['Type'];
+    time = json['Time'];
+    venue = json['Venue'];
+    date = json['Date'];
 
     imgUrl = json['Image'];
   }
@@ -35,24 +35,24 @@ class Event {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['Department'] = this.department;
-    data['desc'] = this.desc;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['time'] = this.time;
-    data['venue'] = this.venue;
-    data['date'] = this.date;
+    data['RoundDescription'] = this.desc;
+    data['Name'] = this.name;
+    data['Type'] = this.type;
+    data['Time'] = this.time;
+    data['Venue'] = this.venue;
+    data['Date'] = this.date;
     return data;
   }
 
   Event.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    department = data['department'];
+    department = data['Department'];
     desc = data['RoundDescription'];
     name = data['Name'];
-    type = data['type'];
-    time = data['time'];
-    venue = data['venue'];
-    date = data['date'];
+    type = data['Type'];
+    time = data['Time'];
+    venue = data['Venue'];
+    date = data['Date'];
     imgUrl = data['Image'];
   }
 }

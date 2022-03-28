@@ -18,11 +18,11 @@ class TicketController {
           .doc(user.email)
           .collection('events')
           .get();
-      List<Map<String, dynamic>> events = [];
-      for (final doc in eventSnapshot.docs) {
-        events.add((UserEvent.fromDocument(doc)).toMap());
-      }
-      // List<String> events = eventSnapshot.docs.map((doc) => doc.id).toList();
+      // List<Map<String, dynamic>> events = [];
+      // for (final doc in eventSnapshot.docs) {
+      //   events.add((UserEvent.fromDocument(doc)).toMap());
+      // }
+      List<String> events = eventSnapshot.docs.map((doc) => doc.id).toList();
       data['events'] = events;
 
       return data;
