@@ -66,23 +66,35 @@ class AuthController {
   }
 
   getCurrentUserDetails() async {
-    final user = FirebaseAuth.instance.currentUser;
-    final snapShot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.email!)
-        .get();
-    final data = snapShot.data();
-    if (data != null) {
-      CurrentUser().name = data['Name'] ?? "";
-      CurrentUser().email = data['email'] ?? "";
-      CurrentUser().college = data['College'] ?? "";
-      CurrentUser().dept = data['Department'] ?? "";
-    }
+    await Future.wait([getEventAccountDetails(), setNameDetails()])
+        .then((value) {
+      print(value);
+    });
+    return CurrentUser();
+  }
+
+  Future<void> getEventAccountDetails() async {
     List<UserEvent> _userEvents =
         await EventsController().getCurrentUserRegisteredEvents();
     CurrentUser().registeredEvents =
         await EventsController().getRegisteredEventsDetails(_userEvents);
+  }
 
-    return CurrentUser();
+  Future<void> setNameDetails() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    final snapShot = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.email!)
+        .get()
+        .then((snapshot) {
+      final data = snapshot.data();
+      if (data != null) {
+        CurrentUser().name = data['Name'] ?? "";
+        CurrentUser().email = data['email'] ?? "";
+        CurrentUser().college = data['College'] ?? "";
+        CurrentUser().dept = data['Department'] ?? "";
+      }
+    });
   }
 }

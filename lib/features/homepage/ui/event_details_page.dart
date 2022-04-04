@@ -12,7 +12,18 @@ class EventDetailScreen extends StatelessWidget {
         children: [
           Hero(
             tag: "event_${event.name}",
-            child: Image.network(event.imgUrl!),
+            child: Image.network(
+              event.imgUrl ?? "",
+              errorBuilder: (context, error, stackTrace) {
+                return Center(
+                  child: Text(
+                    '${event.name}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              },
+            ),
           ),
           if (event.name != null)
             DarkContatiner(
@@ -23,20 +34,6 @@ class EventDetailScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
-                  ),
-                ),
-              ),
-              EdgeInsets.all(9),
-            ),
-          if (event.desc != null)
-            DarkContatiner(
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "${event.desc}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    // fontSize: 20,
                   ),
                 ),
               ),
@@ -76,6 +73,20 @@ class EventDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "Venue: ${event.venue}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    // fontSize: 20,
+                  ),
+                ),
+              ),
+              EdgeInsets.all(9),
+            ),
+          if (event.desc != null)
+            DarkContatiner(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Description: \n\n${event.desc}",
                   style: TextStyle(
                     color: Colors.white,
                     // fontSize: 20,

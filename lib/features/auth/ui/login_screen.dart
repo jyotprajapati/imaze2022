@@ -81,6 +81,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ));
     } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RegisterScreen(
+              googleUser: googleUser,
+            ),
+          ));
+      return;
+
       if (userExist == true) {
         await AuthController().googleSignin(googleUser);
 

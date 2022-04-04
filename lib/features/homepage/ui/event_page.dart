@@ -70,6 +70,15 @@ class _EventPageState extends State<EventPage> {
                           child: Image.network(
                             events[index].imgUrl ?? "",
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Center(
+                                child: Text(
+                                  '${events[index].name}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),

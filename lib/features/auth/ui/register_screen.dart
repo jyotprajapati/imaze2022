@@ -280,6 +280,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       );
+
+      await sheetsInterceptor.initWorksheet("registration");
       await sheetsInterceptor
           .addValue(
         enrollment: _enrlController.text,
@@ -323,19 +325,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   addToSheets() async {
     for (UserEvent event in events) {
-      await sheetsInterceptor.initWorksheet(event.name);
-      sheetsInterceptor.addIndividual(
-        enrollment: _enrlController.text,
-        name: _nameController.text,
-        College: _collegeController.text,
-        Department: _deptController.text,
-        Phone: _phoneController.text,
-        Year: _yearController.text,
-        email: widget.googleUser.email,
-        time: DateTime.now().toIso8601String(),
-        leaderEmail: event.leaderEmail,
-        leaderName: event.leaderName,
-      );
+      if (event.name.startsWith("Rangmanch")) {
+        String sheetName = "Rangmanch";
+
+        await sheetsInterceptor.initWorksheet(sheetName);
+        await sheetsInterceptor.addIndividual(
+          name: _nameController.text,
+          enrollment: _enrlController.text,
+          College: _collegeController.text,
+          Department: _deptController.text,
+          Phone: _phoneController.text,
+          Year: _yearController.text,
+          email: widget.googleUser.email,
+          time: DateTime.now().toIso8601String(),
+          activity: event.name,
+        );
+      } else {
+        await sheetsInterceptor.initWorksheet(event.name);
+        await sheetsInterceptor.addIndividual(
+          enrollment: _enrlController.text,
+          name: _nameController.text,
+          College: _collegeController.text,
+          Department: _deptController.text,
+          Phone: _phoneController.text,
+          Year: _yearController.text,
+          email: widget.googleUser.email,
+          time: DateTime.now().toIso8601String(),
+          leaderEmail: event.leaderEmail,
+          leaderName: event.leaderName,
+        );
+      }
     }
   }
 }

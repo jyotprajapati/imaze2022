@@ -72,6 +72,7 @@ class SheetsInterceptor {
     String? enrollment,
     String? name,
     String? email,
+    String? activity,
     String? time,
     String? College,
     String? Department,
@@ -85,6 +86,7 @@ class SheetsInterceptor {
         'Enrollment': enrollment,
         'Name': name,
         'email': email,
+        'activity': activity,
         'Time': time,
         'College': College,
         'Department': Department,
@@ -93,12 +95,21 @@ class SheetsInterceptor {
         'leaderName': leaderName,
         'leaderEmail': leaderEmail,
       };
+
+      if (activity == null) {
+        row.remove("activity");
+      }
+      print("ROW $row");
       final rowIndex = await sheets!.values.rowIndexOf(enrollment!);
       if (!(rowIndex == -1)) {
         print('already registered');
-        await sheets!.deleteRow(rowIndex);
+        sheets!.deleteRow(rowIndex).then((value) => print("deleted"));
       }
-      return await sheets!.values.appendRow(row.values.toList());
+
+      print("adding row");
+      return await sheets!.values
+          .appendRow(row.values.toList())
+          .then((value) => print("added"));
     } catch (e) {
       print(e);
       rethrow;
