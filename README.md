@@ -1,17 +1,29 @@
-# imaze2k22
 
-A new Flutter project.
+# Imaze22 (Application to digitalize the college fest)
 
-## Getting Started
+Every year G H Patel College of Engineering and Technology organizes its college fest with tech and non tech envents and activities. This was earlier all done on papers. First time in 2022, GCET has its all online. Through the this application.
 
-This project is a starting point for a Flutter application.
+It has following features : 
 
-A few resources to get you started if this is your first Flutter project:
+ - Ticket booking for events and activities
+ - Verification of tickets through QR Code scanners
+ - View your comming events
+ - Get all the details of events and fest sctivities
+ - Get your cool profile
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Author
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# imaze2022" 
+- [@jyotprajapati](https://github.com/jyotprajapati)
+
+
+## Screenshots
+
+![App Screenshot](https://drive.google.com/uc?id=1Qs6GuU4DE3RJ3VAzNQaPYc4b-tnVczdi)
+
+![App Screenshot](https://drive.google.com/uc?id=1QlsAMMlKysQgXUlCX23lPqpGqabZRqO1)
+
+![App Screenshot](https://drive.google.com/uc?id=1QkV9SbtWJqLZ9Kp2_i-4POfVvX8B2Dwn)
+
+![App Screenshot](https://drive.google.com/uc?id=1QkUQBEJQ1fS7j-u0daLkkXdf5TxV2uSU)
+
+![App Screenshot](https://drive.google.com/uc?id=1QgOoL3aFFBm5Bphrws4lUNhn7DQpHxe0)
